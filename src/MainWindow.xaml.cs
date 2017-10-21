@@ -1,30 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using MahApps.Metro.Controls;
-using System.Collections.ObjectModel;
+﻿using MahApps.Metro.Controls;
+using System;
 using System.Collections.Specialized;
-using Newtonsoft.Json;
+using System.Windows;
 
 namespace gauthUI
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
-	public partial class MainWindow : MetroWindow
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : MetroWindow
 	{
 		private AuthKeyConfig _config = null;
-		private string _filename = "gauthUI.config";
+		private string _filename = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".gauth", "keys.json");
+        private UpdateModel _updateModel = new UpdateModel();
 
 		public MainWindow()
 		{
@@ -33,6 +21,18 @@ namespace gauthUI
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
+            if (_updateModel.NeedsUpdate())
+            {
+                var updateWindow = new UpdateWindow(_updateModel);
+                updateWindow.ShowDialog();
+
+                if (updateWindow.DialogResult.HasValue && updateWindow.DialogResult.Value)
+                {
+                    Application.Current.Shutdown();
+                    return;
+                }
+            }
+
 			_config = new AuthKeyConfig();
 			_config.Keys.CollectionChanged += new NotifyCollectionChangedEventHandler(AuthKeys_CollectionChanged);
 			_config.Load(_filename);

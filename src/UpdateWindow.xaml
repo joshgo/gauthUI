@@ -1,0 +1,16 @@
+﻿<Controls:MetroWindow x:Class="gauthUI.UpdateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:gauthUI"
+        mc:Ignorable="d"
+        Title="Auth : Update" Height="300" Width="400.301" MaxHeight="300" MaxWidth="600" Loaded="Window_Loaded" Background="#FFD7E0E0" HorizontalAlignment="Stretch">
+    <Grid Margin="0,0,0,50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Red">
+        <TextBox Name="txtUpdates" TextWrapping="Wrap" IsReadOnly="true" AcceptsReturn="True" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  VerticalScrollBarVisibility="Auto">
+        </TextBox>
+        <Button Name="UpdateBtn" Margin="0,235,64.301,-41" IsDefault="True" Click="UpdateBtnClick" HorizontalAlignment="Right" VerticalAlignment="Bottom">Update</Button>
+        <Button Name="OkOrCancelButton" Margin="232,235,8,-41" Click="ButtonOkClick" CommandParameter="Cancel" HorizontalAlignment="Right" VerticalAlignment="Bottom">Cancel</Button>
+    </Grid>
+</Controls:MetroWindow>
